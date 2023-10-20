@@ -32,7 +32,7 @@ public class UserController {
     @Autowired
     private JwtUtils jwtutil;
 	
-    @PostMapping("/save")
+    @PostMapping(value="/save" ,consumes = {"appliation/json"})
     public ResponseEntity<User> saveUser(@RequestBody User user)
     {
     	return new ResponseEntity<User>(this.service.SaveUser(user),HttpStatus.CREATED);

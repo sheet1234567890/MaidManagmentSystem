@@ -13,6 +13,10 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +29,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Maid {
 	@Id
-	  private Long userId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	  private Long mId;
     private String FirstName;
     private String LastName;
     private String email;
@@ -41,13 +46,13 @@ public class Maid {
     @Lob
 	@Column(name="imageData",length = 1000)
 	private byte[] profileData;
-   
-    @ManyToOne
+    
+    @ManyToOne 
     private Category category;
-
+    
     @OneToMany(mappedBy = "maid")
     private List<Rating> ratings;
-
+  
     @OneToMany(mappedBy = "maid")
     private List<Review> reviews;
 

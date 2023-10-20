@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +26,7 @@ public class MaidController {
 	@PostMapping("/save")
 	public ResponseEntity<Maid>saveMaid(@RequestBody Maid maid)
 	{
+		System.out.println("...");
 		return new ResponseEntity<Maid>(this.service.SaveMaid(maid),HttpStatus.CREATED);
 	}
 	@GetMapping("/get")
@@ -41,6 +43,12 @@ public class MaidController {
 	public ResponseEntity<List<Maid>> getMaidOfCategoryWise(@PathVariable Long id)
 	{
 		return new ResponseEntity<List<Maid>>(this.service.listOfCategoryWiseMaids(id),HttpStatus.OK);
+	}
+	@PutMapping
+	public ResponseEntity<Maid>updateMaid(@RequestBody Maid maid)
+	{
+		System.out.println("...");
+		return new ResponseEntity<Maid>(this.service.SaveMaid(maid),HttpStatus.CREATED);
 	}
 	
 }

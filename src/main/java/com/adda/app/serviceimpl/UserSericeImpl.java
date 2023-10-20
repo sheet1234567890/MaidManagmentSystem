@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.adda.app.CustomException.UserExistException;
 import com.adda.app.Entity.User;
 import com.adda.app.Service.userService;
 import com.adda.app.reposatory.UserRepo;
@@ -26,9 +27,14 @@ public class UserSericeImpl implements userService,UserDetailsService{
 	@Override
 	public User SaveUser(User user) {
 		// TODO Auto-generated method stub
+		User u =this.urepo.getUserByEmail(user.getEmail());
+		if(u!=null) 
+		{
+			throw new UserExistException("User Alredy present in this email...");
+		}
 		System.out.println(user.getPassword());
 		ArrayList a = new ArrayList();
-		a.add("USER");
+		a.add("ADMIN");
 		user.setRole(a);
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		System.out.println(user.getPassword());

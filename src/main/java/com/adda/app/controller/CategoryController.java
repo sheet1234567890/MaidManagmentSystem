@@ -39,9 +39,9 @@ public class CategoryController {
 	{
 		this.service.DeleteCategory(id);
 	}
-    @PutMapping("update/{id}")
-    public ResponseEntity<Category> updateCategory(@PathVariable Long id)
+    @PutMapping("/update")
+    public ResponseEntity<Category> updateCategory(@RequestBody Category c)
     {
-    	return new ResponseEntity<Category>(this.service.updateCategory(id),HttpStatus.OK);
+    	return new ResponseEntity<Category>(this.service.saveCategory(c),HttpStatus.OK);
     }
 }

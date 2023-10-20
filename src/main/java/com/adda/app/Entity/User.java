@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +26,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-	 @Id
+	 	@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long userId;
 	    private String FirstName;
@@ -39,12 +42,14 @@ public class User {
 	    @ElementCollection(fetch = FetchType.EAGER)
 	    private List<String> role;
 	    private boolean isActive=true;
+	    
 	    @Lob
 		@Column(name="imageData",length = 1000)
 		private byte[] profileData;
+	  
 	    @OneToMany(mappedBy = "user")
 	    private List<Rating> ratings;
-
+	    
 	    @OneToMany(mappedBy = "user")
 	    private List<Review> reviews;
 

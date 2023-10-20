@@ -51,6 +51,8 @@ public class SecurityConfig {
 	{
 		 http.csrf().disable()
 		.authorizeRequests().antMatchers("/auth/login","/auth/save").permitAll()
+		.antMatchers("/admin/cat","/admin/cat/save","/admin/cat/del","/admin/cat/update","/admin/maid/save","/admin/maid/get").hasAuthority("ADMIN")
+		.antMatchers("/auth/current-user","/admin/maid/active","/admin/maid/{id}","/rating/save","/rating/{mid}","/review/save","review/{id}").hasAnyAuthority("ADMIN","USER")
 		
 		.anyRequest().authenticated()
 		.and()
